@@ -232,7 +232,7 @@ def node_generate_sql(state: SQLState) -> SQLState:
 
 def node_security_check(state: SQLState) -> SQLState:
     """Flags disallowed keywords. route_after_security will short-circuit to END."""
-    if BLOCKED.search(state["sql"]):
+    if BLOCKED.search(state["sql"]) or BLOCKED.search(state["question"]):
         state["error"] = "Blocked: query contains a disallowed keyword."
         state["result"] = None
     return state
